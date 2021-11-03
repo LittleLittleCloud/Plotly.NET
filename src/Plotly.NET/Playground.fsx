@@ -161,6 +161,25 @@ open FSharpAux
 open System
 open System.IO
 
+let y = [|"Sales person A"; "Sales person B"; "Sales person C"; "Sales person D"; "Sales person E"|]
+let x = [|1200.; 909.4; 600.6; 300.; 80.|]
+
+// Customize the connector lines used to connect the funnel bars
+let connectorLine = Line.init (Color=Color.fromString "royalblue", Dash=StyleParam.DrawingStyle.Dot, Width=3.)
+let connector = FunnelConnector.init(Line=connectorLine)
+
+// Customize the outline of the funnel bars
+let line = Line.init(Width=2.,Color=Color.fromString "3E4E88")
+
+[
+    Chart.StackedFunnel (x,y,MarkerColor=Color.fromString "59D4E8", MarkerOutline=line, Connector=connector)
+    Chart.StackedFunnel (x,y,MarkerColor=Color.fromString "59D4E8", MarkerOutline=line, Connector=connector)
+
+]
+|> Chart.combine
+|> Chart.withMarginSize(Left=100)
+|> Chart.show
+
 let layout =
     Layout.init (Font = Font.init (Family = StyleParam.FontFamily.Raleway, Size = 14.))
 
